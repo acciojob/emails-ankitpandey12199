@@ -7,12 +7,12 @@ import java.util.Date;
 
 class Mail
 {
-    Date date;
+    String date;
     String sender;
     String message;
     Mail(Date date,String sender,String message)
     {
-        this.date=date;
+        this.date=String.valueOf(date);
         this.message=message;
         this.sender=sender;
     }
@@ -82,13 +82,11 @@ public class Gmail extends Email {
     public int findMailsBetweenDates(Date start, Date end){
         //find number of mails in the inbox which are received between given dates
         //It is guaranteed that start date <= end date
-        int s=-1,count=0;
+        int count=0;
+        String s=String.valueOf(start);
+        String e=String.valueOf(end);
         for (int i = 0; i < inbox.size(); i++) {
-            if(s==-1 && inbox.get(i).date.equals(start) )
-            {
-                s=i;
-            }
-            if(s!=-1 && inbox.get(i).date.before(end))
+            if(inbox.get(i).date.compareTo(s)>=0 && inbox.get(i).date.compareTo(e)<=0)
                 count++;
         }
         return count;
